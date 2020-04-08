@@ -6,7 +6,7 @@ describe Modbus::RTUClient do
       response = Bytes[0x02, 0x01, 0x02, 0x80, 0x02, 0x1D, 0xFD]
       io = DuplexIO.new(IO::Memory.new(response))
 
-      rtu_client = Modbus::RTUClient.new(2, io)
+      rtu_client = Modbus::RTUClient.new(io, 2)
       coils = rtu_client.read_coils(33, 12)
 
       bits = BitArray.new(12)
