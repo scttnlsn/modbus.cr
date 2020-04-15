@@ -32,6 +32,12 @@ module Modbus
       bits
     end
 
+    def words
+      @buffer.to_slice.in_groups_of(2, 0).map do |(msb, lsb)|
+        ((msb.to_u16 << 8) | lsb.to_u16)
+      end
+    end
+
     def crc16
       crc = 0xFFFF_u16
 
