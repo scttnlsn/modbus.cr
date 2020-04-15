@@ -12,6 +12,7 @@ module Modbus
       buffer.write_crc
 
       io.write(buffer.to_slice)
+      io.flush
     end
 
     protected def recv_message(function_code : UInt8)
