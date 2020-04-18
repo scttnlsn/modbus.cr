@@ -10,31 +10,43 @@ module Modbus
     end
 
     def read_coils(addr : UInt16, num_coils : UInt16) : BitArray
-      function_code = 1_u8
+      read_bits(1, addr, num_coils)
+    end
 
-      pdu = IO::Memory.new
-      pdu.write_byte(function_code)
-      pdu.write_bytes(addr - 1, IO::ByteFormat::BigEndian)
-      pdu.write_bytes(num_coils, IO::ByteFormat::BigEndian)
+    def read_discrete_inputs(addr : UInt16, num_inputs : UInt16) : BitArray
+      read_bits(2, addr, num_inputs)
+    end
 
-      send_message(pdu.to_slice)
-
-      buffer = recv_message(function_code)
-      buffer.bits()[0...num_coils.to_i32]
+    def read_holding_registers(addr : UInt16, num_registers : UInt16) : Array(UInt16)
+      read_bytes(3, addr, num_registers)
     end
 
     def read_input_registers(addr : UInt16, num_registers : UInt16) : Array(UInt16)
-      function_code = 4_u8
+      read_bytes(4, addr, num_registers)
+    end
 
+    def read_bits(function_code : UInt8, addr : UInt16, num_bits : UInt16) : BitArray
       pdu = IO::Memory.new
       pdu.write_byte(function_code)
       pdu.write_bytes(addr - 1, IO::ByteFormat::BigEndian)
-      pdu.write_bytes(num_registers, IO::ByteFormat::BigEndian)
+      pdu.write_bytes(num_bits, IO::ByteFormat::BigEndian)
 
       send_message(pdu.to_slice)
 
       buffer = recv_message(function_code)
-      buffer.words()[0...num_registers.to_i32]
+      buffer.bits()[0...num_bits.to_i32]
+    end
+
+    def read_bytes(function_code : UInt8, addr : UInt16, num_bytes : UInt16) : Array(UInt16)
+      pdu = IO::Memory.new
+      pdu.write_byte(function_code)
+      pdu.write_bytes(addr - 1, IO::ByteFormat::BigEndian)
+      pdu.write_bytes(num_bytes, IO::ByteFormat::BigEndian)
+
+      send_message(pdu.to_slice)
+
+      buffer = recv_message(function_code)
+      buffer.words()[0...num_bytes.to_i32]
     end
 
     private def send_pdu(bytes)

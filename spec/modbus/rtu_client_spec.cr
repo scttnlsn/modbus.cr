@@ -19,6 +19,38 @@ describe Modbus::RTUClient do
     end
   end
 
+  describe "#read_discrete_inputs" do
+    it "should send and receive messages" do
+      request = Bytes[0x01, 0x02, 0x01, 0xF4, 0x00, 0x10, 0x39, 0xC8]
+      response = Bytes[0x01, 0x02, 0x02, 0x05, 0x00, 0xBA, 0xE8]
+
+      io = DuplexIO.new(IO::Memory.new(response))
+      rtu_client = Modbus::RTUClient.new(io, 1)
+      coils = rtu_client.read_discrete_inputs(501, 16)
+
+      bits = BitArray.new(16)
+      bits[0] = true
+      bits[2] = true
+      coils.should eq bits
+
+      io.tx.to_slice.should eq request
+    end
+  end
+
+  describe "#read_holding_registers" do
+    it "should send and receive messages" do
+      request = Bytes[0x01, 0x03, 0x02, 0x58, 0x00, 0x02, 0x44, 0x60]
+      response = Bytes[0x01, 0x03, 0x04, 0x03, 0xE8, 0x13, 0x88, 0x77, 0x15]
+
+      io = DuplexIO.new(IO::Memory.new(response))
+      rtu_client = Modbus::RTUClient.new(io)
+      registers = rtu_client.read_holding_registers(601, 2)
+
+      registers.should eq [1000, 5000]
+      io.tx.to_slice.should eq request
+    end
+  end
+
   describe "#read_input_registers" do
     it "should send and receive messages" do
       request = Bytes[0x01, 0x04, 0x00, 0xC8, 0x00, 0x02, 0xF0, 0x35]
