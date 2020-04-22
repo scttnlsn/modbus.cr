@@ -20,13 +20,11 @@ module Modbus
         raise RTUException.new("unit address mismatch")
       end
 
-      bytes = recv_pdu(function_code)
+      pdu = recv_pdu(function_code)
 
       message = IO::Memory.new
       message.write_byte(unit_address)
-      message.write_byte(function_code)
-      message.write_byte(bytes.size.to_u8)
-      message.write(bytes)
+      message.write(pdu.bytes)
 
       crc = recv_crc
       if crc != calc_crc(message)
@@ -34,7 +32,7 @@ module Modbus
       end
 
       buffer = Buffer.new
-      buffer.write(bytes)
+      buffer.write(pdu.data)
       buffer
     end
 
@@ -49,7 +47,6 @@ module Modbus
 
       val = IO::Memory.new
       val.write_bytes(crc, IO::ByteFormat::LittleEndian)
-      val.rewind
       val.to_slice
     end
   end
