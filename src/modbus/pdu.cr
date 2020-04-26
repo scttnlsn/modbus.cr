@@ -13,7 +13,13 @@ module Modbus
     def recv(io : IO)
       function_code = io.read_byte || raise(IO::EOFError.new)
       if function_code != @function_code
-        raise PDUException.new("function code mismatch")
+        if function_code == @function_code + 0x80
+          # error response
+          exception_code = io.read_byte || raise(IO::EOFError.new)
+          raise ModbusException.new(exception_code)
+        else
+          raise PDUException.new("function code mismatch")
+        end
       end
 
       if function_code < 5

@@ -25,7 +25,7 @@ module Modbus
       size = io.read_bytes(UInt16, IO::ByteFormat::BigEndian)
 
       if io.read_byte != unit_address
-        raise RTUException.new("unit address mismatch")
+        raise TCPException.new("unit address mismatch")
       end
 
       pdu = recv_pdu(function_code)
