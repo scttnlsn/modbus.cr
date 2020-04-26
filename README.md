@@ -36,4 +36,13 @@ rtu_client = Modbus::RTUClient.open(serial_port)
 # read 4 coils starting at address 1
 coils : BitArray = rtu_client.read_coils(1, 4)
 puts coils
+
+require "socket"
+
+socket = TCPSocket.new("example.modbus.host", 502)
+tcp_client = Modbus::TCPClient.new(socket)
+
+# read 1 register starting at address 123
+registers = tcp_client.read_holding_registers(123, 1)
+puts registers[0]
 ```

@@ -1,3 +1,5 @@
+require "bit_array"
+
 module Modbus
   class Client
     getter :io
@@ -42,7 +44,7 @@ module Modbus
       send_message(pdu.to_slice)
 
       buffer = recv_message(function_code)
-      addr, val = buffer.words()
+      addr, val = buffer.words
       val == 0xFF00
     end
 
@@ -57,7 +59,7 @@ module Modbus
       send_message(pdu.to_slice)
 
       buffer = recv_message(function_code)
-      addr, val = buffer.words()
+      addr, val = buffer.words
       val
     end
 
@@ -77,7 +79,7 @@ module Modbus
       send_message(pdu.to_slice)
 
       buffer = recv_message(function_code)
-      addr, count = buffer.words()
+      addr, count = buffer.words
       [addr + 1, count]
     end
 
@@ -90,7 +92,7 @@ module Modbus
       send_message(pdu.to_slice)
 
       buffer = recv_message(function_code)
-      buffer.bits()[0...num_bits.to_i32]
+      buffer.bits[0...num_bits.to_i32]
     end
 
     private def read_bytes(function_code : UInt8, addr : UInt16, num_bytes : UInt16) : Array(UInt16)
@@ -102,7 +104,7 @@ module Modbus
       send_message(pdu.to_slice)
 
       buffer = recv_message(function_code)
-      buffer.words()[0...num_bytes.to_i32]
+      buffer.words[0...num_bytes.to_i32]
     end
 
     private def send_pdu(bytes)

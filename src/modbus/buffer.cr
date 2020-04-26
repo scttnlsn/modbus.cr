@@ -1,7 +1,7 @@
 module Modbus
   class Buffer < IO
     def initialize(buffer : IO::Memory = IO::Memory.new)
-      @buffer = buffer || IO::Memory.new
+      @buffer = buffer
       @buffer.rewind
     end
 
@@ -11,6 +11,10 @@ module Modbus
 
     def write(bytes) : Nil
       @buffer.write(bytes)
+    end
+
+    def write_word(value : UInt16)
+      @buffer.write_bytes(value, IO::ByteFormat::BigEndian)
     end
 
     def to_slice
@@ -34,7 +38,7 @@ module Modbus
 
     def words
       @buffer.to_slice.in_groups_of(2, 0).map do |(msb, lsb)|
-        ((msb.to_u16 << 8) | lsb.to_u16)
+        (msb.to_u16 << 8) | lsb.to_u16
       end
     end
 

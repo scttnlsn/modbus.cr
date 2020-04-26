@@ -16,13 +16,13 @@ module Modbus
         raise PDUException.new("function code mismatch")
       end
 
-      if function_code >= 5
-        @data = Bytes.new(4)
+      if function_code < 5
+        # these PDUs are variable size
+        byte_count = io.read_byte || raise(IO::EOFError.new)
+        @data = Bytes.new(byte_count)
         io.read_fully(@data)
       else
-        byte_count = io.read_byte || raise(IO::EOFError.new)
-
-        @data = Bytes.new(byte_count)
+        @data = Bytes.new(4)
         io.read_fully(@data)
       end
     end

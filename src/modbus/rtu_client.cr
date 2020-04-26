@@ -1,5 +1,3 @@
-require "bit_array"
-
 module Modbus
   class RTUClient < Client
     include RTU
