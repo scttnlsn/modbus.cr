@@ -1,13 +1,6 @@
-# modbus
+# modbus.cr
 
 Modbus client library for Crystal
-
----
-
-Modbus protocol info:
-
-* https://www.fernhillsoftware.com/help/drivers/modbus/modbus-protocol.html
-* https://minimalmodbus.readthedocs.io/en/stable/modbusdetails.html
 
 ## Installation
 
@@ -20,6 +13,16 @@ Modbus protocol info:
    ```
 
 2. Run `shards install`
+
+## Usage
+
+```crystal
+require "modbus"
+```
+
+## Documentation
+
+[API (master)](https://scttnlsn.github.io/modbus.cr/)
 
 ## Example
 
@@ -46,3 +49,18 @@ tcp_client = Modbus::TCPClient.new(socket)
 registers = tcp_client.read_holding_registers(123, 1)
 puts registers[0]
 ```
+
+## Testing
+
+To run the tests:
+
+```
+crystal spec
+```
+
+## Resources
+
+Modbus protocol info:
+
+* https://www.fernhillsoftware.com/help/drivers/modbus/modbus-protocol.html
+* https://minimalmodbus.readthedocs.io/en/stable/modbusdetails.html

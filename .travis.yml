@@ -3,6 +3,7 @@ language: crystal
 script:
   - crystal spec
   - crystal tool format --check
+  - crystal docs
 
 deploy:
   provider: pages
