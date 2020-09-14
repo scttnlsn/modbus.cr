@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Crystal Docs 0.34.0">
+<meta name="crystal_docs.project_version" content="HEAD">
+<meta name="crystal_docs.project_name" content="modbus">
+
+
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/doc.js"></script>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+
+  <meta id="repository-name" content="modbus">
+  <title>modbus HEAD</title>
+  <script type="text/javascript">
+  CrystalDocs.base_path = "";
+  </script>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="index.html">
+          modbus
+        </a>
+      </h1>
+
+      <span class="project-version">
+        HEAD
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results" class="hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent " data-id="modbus/Modbus" data-name="modbus">
+      <a href="Modbus.html">Modbus</a>
+      
+        <ul>
+  
+  <li class=" " data-id="modbus/Modbus/Buffer" data-name="modbus::buffer">
+      <a href="Modbus/Buffer.html">Buffer</a>
+      
+    </li>
+  
+  <li class=" " data-id="modbus/Modbus/Client" data-name="modbus::client">
+      <a href="Modbus/Client.html">Client</a>
+      
+    </li>
+  
+  <li class=" " data-id="modbus/Modbus/ModbusException" data-name="modbus::modbusexception">
+      <a href="Modbus/ModbusException.html">ModbusException</a>
+      
+    </li>
+  
+  <li class=" " data-id="modbus/Modbus/PDU" data-name="modbus::pdu">
+      <a href="Modbus/PDU.html">PDU</a>
+      
+    </li>
+  
+  <li class=" " data-id="modbus/Modbus/PDUException" data-name="modbus::pduexception">
+      <a href="Modbus/PDUException.html">PDUException</a>
+      
+    </li>
+  
+  <li class=" " data-id="modbus/Modbus/RTU" data-name="modbus::rtu">
+      <a href="Modbus/RTU.html">RTU</a>
+      
+    </li>
+  
+  <li class=" " data-id="modbus/Modbus/RTUClient" data-name="modbus::rtuclient">
+      <a href="Modbus/RTUClient.html">RTUClient</a>
+      
+    </li>
+  
+  <li class=" " data-id="modbus/Modbus/RTUException" data-name="modbus::rtuexception">
+      <a href="Modbus/RTUException.html">RTUException</a>
+      
+    </li>
+  
+  <li class=" " data-id="modbus/Modbus/TCP" data-name="modbus::tcp">
+      <a href="Modbus/TCP.html">TCP</a>
+      
+    </li>
+  
+  <li class=" " data-id="modbus/Modbus/TCPClient" data-name="modbus::tcpclient">
+      <a href="Modbus/TCPClient.html">TCPClient</a>
+      
+    </li>
+  
+  <li class=" " data-id="modbus/Modbus/TCPException" data-name="modbus::tcpexception">
+      <a href="Modbus/TCPException.html">TCPException</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1><a id="modbus.cr" class="anchor" href="#modbus.cr">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>modbus.cr</h1>
+
+<p>Modbus client library for Crystal</p>
+
+<h2><a id="installation" class="anchor" href="#installation">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Installation</h2>
+
+<ol><li>Add the dependency to your <code>shard.yml</code>:</li></ol>
+
+<p><code></code>`yaml
+   dependencies:</p>
+
+<pre><code> modbus:
+   github: scttnlsn<span class="s">/modbus.cr</span></code></pre>
+
+<p><code></code>`</p>
+
+<ol><li>Run <code>shards install</code></li></ol>
+
+<h2><a id="usage" class="anchor" href="#usage">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Usage</h2>
+
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;modbus&quot;</span></code></pre>
+
+<h2><a id="documentation" class="anchor" href="#documentation">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Documentation</h2>
+
+<p><a href="https://scttnlsn.github.io/modbus.cr/" target="_blank">API (master)</a></p>
+
+<h2><a id="example" class="anchor" href="#example">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Example</h2>
+
+<pre><code class="language-bash">stty -F /dev/ttyUSB0 cs8 19200 ignbrk -brkint -icrnl -imaxbel -opost -onlcr -isig -icanon -iexten -echo -echoe -echok -echoctl -echoke noflsh -ixon -crtscts -hupcl</code></pre>
+
+<pre><code class="language-crystal"><span class="k">require</span> <span class="s">&quot;modbus&quot;</span>
+
+serial_port <span class="o">=</span> <span class="t">File</span>.open(<span class="s">&quot;/dev/ttyUSB0&quot;</span>, <span class="s">&quot;r+&quot;</span>)
+rtu_client <span class="o">=</span> <span class="t">Modbus</span><span class="t">::</span><span class="t">RTUClient</span>.open(serial_port)
+
+<span class="c"># read 4 coils starting at address 1</span>
+coils : <span class="t">BitArray</span> <span class="o">=</span> rtu_client.read_coils(<span class="n">1</span>, <span class="n">4</span>)
+puts coils
+
+<span class="k">require</span> <span class="s">&quot;socket&quot;</span>
+
+socket <span class="o">=</span> <span class="t">TCPSocket</span>.<span class="k">new</span>(<span class="s">&quot;example.modbus.host&quot;</span>, <span class="n">502</span>)
+tcp_client <span class="o">=</span> <span class="t">Modbus</span><span class="t">::</span><span class="t">TCPClient</span>.<span class="k">new</span>(socket)
+
+<span class="c"># read 1 register starting at address 123</span>
+registers <span class="o">=</span> tcp_client.read_holding_registers(<span class="n">123</span>, <span class="n">1</span>)
+puts registers[<span class="n">0</span>]</code></pre>
+
+<h2><a id="testing" class="anchor" href="#testing">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Testing</h2>
+
+<p>To run the tests:</p>
+
+<pre><code>crystal spec</code></pre>
+
+<h2><a id="resources" class="anchor" href="#resources">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>Resources</h2>
+
+<p>Modbus protocol info:</p>
+
+<ul><li>https://www.fernhillsoftware.com/help/drivers/modbus/modbus-protocol.html</li><li>https://minimalmodbus.readthedocs.io/en/stable/modbusdetails.html</li></ul>
+</div>
+</body>
+</html>
