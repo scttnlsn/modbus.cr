@@ -20,4 +20,9 @@ class DuplexIO < IO
     @tx.rewind
     @tx
   end
+
+  def rewind
+    @rx.rewind
+    @tx.rewind
+  end
 end

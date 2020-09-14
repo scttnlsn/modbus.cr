@@ -106,4 +106,17 @@ describe Modbus::TCPClient do
       value.should eq [101, 2]
     end
   end
+
+  it "does not overflow txn_id" do
+    response = Bytes[0x00, 0x01, 0x00, 0x00, 0x00, 0x05, 0x02, 0x01, 0x02, 0x80, 0x02]
+    io = DuplexIO.new(IO::Memory.new(response))
+    client = Modbus::TCPClient.new(io, 2)
+
+    UInt16::MAX.times do
+      client.read_coils(33, 12)
+      io.rewind
+    end
+
+    client.read_coils(33, 12)
+  end
 end

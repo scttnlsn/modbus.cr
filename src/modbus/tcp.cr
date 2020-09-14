@@ -36,7 +36,11 @@ module Modbus
     end
 
     private def next_txn_id
-      @txn_id = (@txn_id + 1) & 0xFFFF
+      if @txn_id == UInt16::MAX
+        @txn_id = 0
+      else
+        @txn_id += 1
+      end
     end
   end
 end

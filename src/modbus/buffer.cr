@@ -1,7 +1,6 @@
 module Modbus
   class Buffer < IO
-    def initialize(buffer : IO::Memory = IO::Memory.new)
-      @buffer = buffer
+    def initialize(@buffer : IO::Memory = IO::Memory.new)
       @buffer.rewind
     end
 

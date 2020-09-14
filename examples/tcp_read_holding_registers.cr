@@ -1,7 +1,7 @@
 require "socket"
 require "../src/modbus"
 
-socket = TCPSocket.new("CLASSIC.lan", 502)
+socket = TCPSocket.new("example.modbus.host", 502)
 client = Modbus::TCPClient.new(socket)
 
 # read 1 register starting at address 4115

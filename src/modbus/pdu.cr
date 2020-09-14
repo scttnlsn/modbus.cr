@@ -5,8 +5,7 @@ module Modbus
   class PDU
     getter :data
 
-    def initialize(function_code : UInt8)
-      @function_code = function_code
+    def initialize(@function_code : UInt8)
       @data = Bytes.new(0)
     end
 

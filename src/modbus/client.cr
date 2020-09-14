@@ -4,8 +4,7 @@ module Modbus
   class Client
     getter :io
 
-    def initialize(io : IO)
-      @io = io
+    def initialize(@io : IO)
     end
 
     def read_coils(addr : UInt16, num_coils : UInt16) : BitArray
